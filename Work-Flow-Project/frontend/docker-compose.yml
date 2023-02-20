@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web: # name
+    build:  # specify image to create container
+      context: . #where to find files for project
+      dockerfile: Dockerfile.dev #specifies the dockerfile, looking in current working directory and find this file
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules 
+      - .:/app
+  tests:
+    build:  # specify image to create container
+      context: . #where to find files for project
+      dockerfile: Dockerfile.dev #specifies the dockerfile, looking in current working directory and find this file
+    volumes:
+      - /app/node_modules 
+      - .:/app #current working directory
+    command: ["npm","run","test"]
